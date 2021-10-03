@@ -1,6 +1,20 @@
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { authActions } from "../slices/authSlice";
 
 const Header = () => {
+  const dispatch = useDispatch();
+  const auth = useSelector((state) => state.authUser);
+  const { user } = auth;
+
+  const login = () => {
+    dispatch(authActions.login());
+  };
+
+  const logout = () => {
+    dispatch(authActions.logout());
+  };
+
   return (
     <div
       style={{
@@ -30,13 +44,25 @@ const Header = () => {
         </Link>
       </div>
       <div>
-        <button
-          style={{
-            padding: "10px 10px",
-          }}
-        >
-          Sign In
-        </button>
+        {user ? (
+          <button
+            onClick={logout}
+            style={{
+              padding: "10px 10px",
+            }}
+          >
+            Log out
+          </button>
+        ) : (
+          <button
+            onClick={login}
+            style={{
+              padding: "10px 10px",
+            }}
+          >
+            Sign In
+          </button>
+        )}
       </div>
     </div>
   );

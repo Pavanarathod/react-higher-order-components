@@ -1,8 +1,9 @@
-import Layout from "./Layout";
-import Header from "../components/Header";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import Header from "../components/Header";
+import requireAuth from "../HOC/requireAuth";
 import { commentActions } from "../slices/commentSlice";
+import Layout from "./Layout";
 
 const PostPage = ({ history }) => {
   const dispatch = useDispatch();
@@ -45,4 +46,4 @@ const PostPage = ({ history }) => {
   );
 };
 
-export default PostPage;
+export default requireAuth(PostPage);
